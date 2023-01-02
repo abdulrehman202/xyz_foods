@@ -17,12 +17,14 @@ class _MenuState extends State<Menu> {
   late List<Temp> categoriesList, filteredList;
 
   late TextEditingController controller;
+  late FocusNode focusNode;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     controller = TextEditingController();
+    focusNode = FocusNode();
     categoriesList = [
       Temp(AppStrings.burgerLink, AppStrings.burger),
       Temp(AppStrings.shawarmaLink, AppStrings.shawarma),
@@ -52,10 +54,11 @@ class _MenuState extends State<Menu> {
         child: Center(
             child: EditableText(
           controller: controller,
-          focusNode: FocusNode(),
+          focusNode: focusNode,
           style: const TextStyle(color: Colors.black),
           backgroundCursorColor: Colors.black,
           cursorColor: Colors.black,
+          autofocus: true,
           onChanged: (string) {
             Future.delayed(Duration.zero, () {
               controller.text = string;
@@ -71,6 +74,7 @@ class _MenuState extends State<Menu> {
                 filteredList = temp;
               });
             });
+            focusNode.requestFocus();
           },
         )));
   }
