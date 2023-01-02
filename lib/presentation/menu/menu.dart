@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:xyz_foods/presentation/Components/ShopBanner.dart';
 import 'package:xyz_foods/presentation/Components/menuCategoryCard.dart';
 import 'package:xyz_foods/presentation/resources/assets_manager.dart';
+import 'package:xyz_foods/presentation/resources/color_manager.dart';
+import 'package:xyz_foods/presentation/resources/values_manager.dart';
 
 import '../resources/strings_manager.dart';
 
@@ -19,39 +21,39 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorManager.primary,
       body: SafeArea(
         child: Column(
           children: [
-            const ShopBanner(),
-            const Divider(),
+            const SizedBox(
+              height: AppSize.s200,
+            ),
             Expanded(
-              child: SingleChildScrollView(
-                  child: Column(children: [
-                Row(children: const [
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(AppSize.s60),
+                        topRight: Radius.circular(AppSize.s60))),
+                padding: const EdgeInsets.all(AppPadding.p20),
+                child: SingleChildScrollView(
+                    child: Column(children: const [
                   MenuCategoryCard(AppStrings.burgerLink, AppStrings.burger),
                   MenuCategoryCard(
                       AppStrings.shawarmaLink, AppStrings.shawarma),
-                ]),
-                Row(children: const [
                   MenuCategoryCard(
                       AppStrings.parathaRollLink, AppStrings.parathaRoll),
                   MenuCategoryCard(
                       AppStrings.spinRollLink, AppStrings.spinRoll),
-                ]),
-                Row(children: const [
                   MenuCategoryCard(AppStrings.friesLink, AppStrings.fries),
                   MenuCategoryCard(AppStrings.pastaLink, AppStrings.pasta),
-                ]),
-                Row(children: const [
                   MenuCategoryCard(AppStrings.pizzaLink, AppStrings.pizza),
                   MenuCategoryCard(AppStrings.iceBarLink, AppStrings.iceBar),
-                ]),
-                Row(children: const [
                   MenuCategoryCard(
                       AppStrings.teaSectionLink, AppStrings.teaSection),
                   MenuCategoryCard(AppStrings.coffeeLink, AppStrings.coffee),
-                ]),
-              ])),
+                ])),
+              ),
             ),
           ],
         ),
