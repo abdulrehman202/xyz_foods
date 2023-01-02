@@ -30,6 +30,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter_custom_clippers: ^2.1.0
+  hidden_drawer_menu: ^3.0.1
   
   flutter:
     sdk: flutter

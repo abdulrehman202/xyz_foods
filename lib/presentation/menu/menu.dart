@@ -1,10 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:xyz_foods/presentation/Components/ShopBanner.dart';
+import 'package:xyz_foods/domain/Sample.dart';
 import 'package:xyz_foods/presentation/Components/menuCategoryCard.dart';
-import 'package:xyz_foods/presentation/resources/assets_manager.dart';
 import 'package:xyz_foods/presentation/resources/color_manager.dart';
 import 'package:xyz_foods/presentation/resources/values_manager.dart';
 
@@ -18,6 +14,67 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
+  late List<Temp> categoriesList, filteredList;
+
+  late TextEditingController controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = TextEditingController();
+    categoriesList = [
+      Temp(AppStrings.burgerLink, AppStrings.burger),
+      Temp(AppStrings.shawarmaLink, AppStrings.shawarma),
+      Temp(AppStrings.parathaRollLink, AppStrings.parathaRoll),
+      Temp(AppStrings.spinRollLink, AppStrings.spinRoll),
+      Temp(AppStrings.friesLink, AppStrings.fries),
+      Temp(AppStrings.pastaLink, AppStrings.pasta),
+      Temp(AppStrings.pizzaLink, AppStrings.pizza),
+      Temp(AppStrings.iceBarLink, AppStrings.iceBar),
+      Temp(AppStrings.teaSectionLink, AppStrings.teaSection),
+      Temp(AppStrings.coffeeLink, AppStrings.coffee),
+    ];
+
+    setState(() {
+      filteredList = categoriesList;
+    });
+  }
+
+  SearchBar() {
+    return Container(
+        margin: const EdgeInsets.all(AppMargin.m18),
+        height: AppSize.s60,
+        padding: const EdgeInsets.all(AppPadding.p14),
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(AppSize.s16))),
+        child: Center(
+            child: EditableText(
+          controller: controller,
+          focusNode: FocusNode(),
+          style: const TextStyle(color: Colors.black),
+          backgroundCursorColor: Colors.black,
+          cursorColor: Colors.black,
+          onChanged: (string) {
+            Future.delayed(Duration.zero, () {
+              controller.text = string;
+              controller.selection =
+                  TextSelection.collapsed(offset: controller.text.length);
+              List<Temp> temp;
+
+              temp = categoriesList
+                  .where((c) =>
+                      (c.category.toLowerCase().contains(string.toLowerCase())))
+                  .toList();
+              setState(() {
+                filteredList = temp;
+              });
+            });
+          },
+        )));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,8 +82,11 @@ class _MenuState extends State<Menu> {
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               height: AppSize.s200,
+              child: Center(
+                child: SearchBar(),
+              ),
             ),
             Expanded(
               child: Container(
@@ -37,22 +97,18 @@ class _MenuState extends State<Menu> {
                         topRight: Radius.circular(AppSize.s60))),
                 padding: const EdgeInsets.all(AppPadding.p20),
                 child: SingleChildScrollView(
-                    child: Column(children: const [
-                  MenuCategoryCard(AppStrings.burgerLink, AppStrings.burger),
-                  MenuCategoryCard(
-                      AppStrings.shawarmaLink, AppStrings.shawarma),
-                  MenuCategoryCard(
-                      AppStrings.parathaRollLink, AppStrings.parathaRoll),
-                  MenuCategoryCard(
-                      AppStrings.spinRollLink, AppStrings.spinRoll),
-                  MenuCategoryCard(AppStrings.friesLink, AppStrings.fries),
-                  MenuCategoryCard(AppStrings.pastaLink, AppStrings.pasta),
-                  MenuCategoryCard(AppStrings.pizzaLink, AppStrings.pizza),
-                  MenuCategoryCard(AppStrings.iceBarLink, AppStrings.iceBar),
-                  MenuCategoryCard(
-                      AppStrings.teaSectionLink, AppStrings.teaSection),
-                  MenuCategoryCard(AppStrings.coffeeLink, AppStrings.coffee),
-                ])),
+                  child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: filteredList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
+                            child: MenuCategoryCard(filteredList[index].url,
+                                filteredList[index].category));
+                      }),
+                ),
               ),
             ),
           ],
