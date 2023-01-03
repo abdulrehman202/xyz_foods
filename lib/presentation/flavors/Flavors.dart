@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:xyz_foods/domain/Sample.dart';
+import 'package:xyz_foods/presentation/Components/FlavorsCard.dart';
 import 'package:xyz_foods/presentation/resources/color_manager.dart';
+import 'package:xyz_foods/presentation/resources/strings_manager.dart';
 import 'package:xyz_foods/presentation/resources/values_manager.dart';
 
 class Flavors extends StatefulWidget {
@@ -14,6 +17,24 @@ class Flavors extends StatefulWidget {
 }
 
 class _FlavorsState extends State<Flavors> {
+  late List<Temp> flavorsList;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    flavorsList = [
+      Temp('Zinger Burger', '180'),
+      Temp('Zinger Jalapeno Burger', '200'),
+      Temp('Zinger Tower Burger', '250'),
+      Temp('Zinger Mighty Burger', '320'),
+      Temp('Patty Burger', '150'),
+      Temp('BBQ Burger', '150'),
+      Temp('BBQ Burger', '150'),
+      Temp('BBQ Burger', '150'),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
@@ -46,6 +67,19 @@ class _FlavorsState extends State<Flavors> {
                   )
                 ],
               ),
+            ),
+          ),
+          Expanded(
+            child: GridView.count(
+              shrinkWrap: true,
+              crossAxisCount: 2,
+              scrollDirection: Axis.vertical,
+              children: List.generate(flavorsList.length, (index) {
+                return Expanded(
+                  child: FlavorCard(
+                      flavorsList[index].url, flavorsList[index].category),
+                );
+              }),
             ),
           ),
         ],
