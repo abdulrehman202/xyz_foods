@@ -69,6 +69,15 @@ class _FlavorsState extends State<Flavors> {
               ),
             ),
           ),
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                margin: const EdgeInsets.all(AppMargin.m12),
+                child: const Text(
+                  'Choose from the flavors below',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              )),
           Expanded(
             child: GridView.count(
               shrinkWrap: true,
@@ -77,7 +86,9 @@ class _FlavorsState extends State<Flavors> {
               children: List.generate(flavorsList.length, (index) {
                 return Expanded(
                   child: FlavorCard(
-                      flavorsList[index].url, flavorsList[index].category),
+                      'https://healthwire.pk/wp-content/uploads/2022/04/disadvantages-of-fast-food.jpg',
+                      flavorsList[index].url,
+                      flavorsList[index].category),
                 );
               }),
             ),
