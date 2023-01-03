@@ -26,13 +26,27 @@ class _FlavorsState extends State<Flavors> {
           ClipPath(
             clipper: OvalBottomBorderClipper(),
             child: Container(
-                height: 200,
-                color: ColorManager.primary,
-                child: Center(
+              height: 200,
+              color: ColorManager.primary,
+              child: Stack(
+                alignment: AlignmentDirectional.center,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Image.network(
+                      'https://healthwire.pk/wp-content/uploads/2022/04/disadvantages-of-fast-food.jpg',
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                  Card(
                     child: Text(
-                  arguments['heading'],
-                  style: const TextStyle(fontSize: AppSize.s28),
-                ))),
+                      arguments['heading'],
+                      style: const TextStyle(fontSize: AppSize.s28),
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ],
       )),
