@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xyz_foods/presentation/NavBarScreen/NavBarScreen.dart';
 import 'package:xyz_foods/presentation/menu/menu.dart';
 import 'package:xyz_foods/presentation/flavors/Flavors.dart';
 import 'package:xyz_foods/presentation/resources/strings_manager.dart';
@@ -8,22 +9,27 @@ class Routes {
   static const String splashRoute = '/';
   static const String menuRoute = '/menu';
   static const String flavorRoute = '/flavors';
+  static const String navBarRoute = '/NavBarScreen';
 }
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.splashRoute:
-        return MaterialPageRoute(builder: (_) => SplashView());
+        return MaterialPageRoute(builder: (_) => const SplashView());
         break;
 
       case Routes.menuRoute:
-        return MaterialPageRoute(builder: (_) => Menu());
+        return MaterialPageRoute(builder: (_) => const Menu());
+        break;
+
+      case Routes.navBarRoute:
+        return MaterialPageRoute(builder: (_) => const NavBarScreen());
         break;
 
       case Routes.flavorRoute:
         return MaterialPageRoute(
-            builder: (_) => Flavors(), settings: routeSettings);
+            builder: (_) => const Flavors(), settings: routeSettings);
         break;
 
       default:

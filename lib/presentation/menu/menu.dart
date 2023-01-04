@@ -3,7 +3,6 @@ import 'package:xyz_foods/domain/Sample.dart';
 import 'package:xyz_foods/presentation/Components/menuCategoryCard.dart';
 import 'package:xyz_foods/presentation/resources/color_manager.dart';
 import 'package:xyz_foods/presentation/resources/values_manager.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../resources/strings_manager.dart';
 
