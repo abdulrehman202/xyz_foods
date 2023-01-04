@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:xyz_foods/presentation/Components/Counter.dart';
+import 'package:xyz_foods/presentation/resources/color_manager.dart';
 import 'package:xyz_foods/presentation/resources/values_manager.dart';
 
-class FoodQuantityDialog extends StatelessWidget {
+class FoodQuantityDialog extends StatefulWidget {
   late String imgUrl, name, price;
   FoodQuantityDialog(this.imgUrl, this.name, this.price, {super.key});
 
   @override
+  State<FoodQuantityDialog> createState() => _FoodQuantityDialogState();
+}
+
+class _FoodQuantityDialogState extends State<FoodQuantityDialog> {
+  @override
   Widget build(BuildContext context) {
+    var simpleIntInput = 0;
     return SimpleDialog(
       contentPadding: const EdgeInsets.all(AppPadding.p12),
       children: [
-        SizedBox(
+        Container(
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(AppSize.s40))),
             height: MediaQuery.of(context).size.height * 0.2,
             width: MediaQuery.of(context).size.width * 0.4,
             child: Image.network(
-              imgUrl,
+              widget.imgUrl,
               fit: BoxFit.fill,
             )),
         Align(
@@ -25,15 +33,24 @@ class FoodQuantityDialog extends StatelessWidget {
             direction: Axis.vertical,
             children: [
               Text(
-                name,
+                widget.name,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                'Rs. ${price}',
+                'Rs. ${widget.price}',
               ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [Text('Quantity: '), CounterWidget()]),
             ],
           ),
         ),
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorManager.primary,
+            ),
+            onPressed: () {},
+            child: Text('Add to Cart'))
       ],
     );
   }

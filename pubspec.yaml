@@ -31,7 +31,7 @@ environment:
 dependencies:
   flutter_custom_clippers: ^2.1.0
   hidden_drawer_menu: ^3.0.1
-  quantity_input: ^1.0.2
+  google_nav_bar: ^5.0.6
 
   flutter:
     sdk: flutter
