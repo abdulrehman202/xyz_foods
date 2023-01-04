@@ -5,7 +5,7 @@ class ColorManager {
   static Color darkGrey = HexColor.frontier('#525252');
   static Color grey = HexColor.frontier('#737477');
   static Color lightGrey = HexColor.frontier('#9e9e9e');
-  static Color primaryOpacity70 = HexColor.frontier('#b3ed9728');
+  static Color primaryOpacity70 = Color.fromARGB(255, 255, 230, 162);
 
   static Color darkPrimary = HexColor.frontier('#d17d11');
   static Color grey1 = HexColor.frontier('#787878');

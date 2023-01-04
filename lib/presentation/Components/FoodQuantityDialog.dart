@@ -17,8 +17,10 @@ class _FoodQuantityDialogState extends State<FoodQuantityDialog> {
     var simpleIntInput = 0;
     return SimpleDialog(
       contentPadding: const EdgeInsets.all(AppPadding.p12),
+      title: Text('Please select the quantity'),
       children: [
         Container(
+            margin: EdgeInsets.symmetric(vertical: AppMargin.m12),
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(AppSize.s40))),
             height: MediaQuery.of(context).size.height * 0.2,
